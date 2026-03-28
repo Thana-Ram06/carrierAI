@@ -14,3 +14,50 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Generate a professional ATS-friendly resume from user inputs
+ * @summary Generate a resume
+ */
+export const GenerateResumeBody = zod.object({
+  name: zod.string(),
+  skills: zod.string(),
+  experience: zod.string(),
+  education: zod.string(),
+  targetRole: zod.string().optional(),
+});
+
+export const GenerateResumeResponse = zod.object({
+  content: zod.string(),
+});
+
+/**
+ * Takes an existing resume and returns an improved professional version
+ * @summary Improve an existing resume
+ */
+export const ImproveResumeBody = zod.object({
+  resume: zod.string(),
+  targetRole: zod.string().optional(),
+});
+
+export const ImproveResumeResponse = zod.object({
+  content: zod.string(),
+});
+
+/**
+ * Generate interview questions and model answers for a given role or skills
+ * @summary Generate interview questions and answers
+ */
+export const GenerateInterviewQuestionsBody = zod.object({
+  role: zod.string(),
+  skills: zod.string().optional(),
+});
+
+export const GenerateInterviewQuestionsResponse = zod.object({
+  questions: zod.array(
+    zod.object({
+      question: zod.string(),
+      answer: zod.string(),
+    }),
+  ),
+});

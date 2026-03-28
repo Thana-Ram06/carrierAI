@@ -1,0 +1,221 @@
+Create a complete production-ready AI Resume & Career Copilot web application using Next.js 16 (App Router), TypeScript, and Tailwind CSS.
+
+IMPORTANT: This project MUST be fully compatible with Vercel deployment and Replit AI generation.
+
+====================
+CRITICAL RULES (VERY IMPORTANT)
+===============================
+
+* DO NOT use Express
+
+* DO NOT use any custom Node.js server
+
+* DO NOT use pnpm workspace or monorepo
+
+* DO NOT use drizzle, pino, or backend frameworks
+
+* DO NOT create separate backend folders
+
+* ONLY use Next.js App Router
+
+* ONLY use /app/api routes for backend logic
+
+* The project must be a single Next.js app
+
+====================
+CORE FEATURES
+=============
+
+1. AI Resume Generator
+
+* Input fields: Name, Skills, Experience, Education
+* On submit → call /api/generate-resume
+* Use OpenAI API to generate a professional ATS-friendly resume
+* Display result in a clean UI card
+
+2. Resume Improver
+
+* Textarea input
+* Call /api/improve-resume
+* Return improved professional version
+
+3. Interview Prep
+
+* Input: Role or skills
+* Call /api/interview
+* Return questions + answers
+
+====================
+TECH STACK
+==========
+
+* Next.js 16 (App Router)
+* TypeScript
+* Tailwind CSS
+* OpenAI API (latest SDK)
+* Fully deployable on Vercel
+
+====================
+PROJECT STRUCTURE
+=================
+
+app/
+page.tsx
+dashboard/page.tsx
+resume-generator/page.tsx
+resume-improver/page.tsx
+interview/page.tsx
+
+api/
+generate-resume/route.ts
+improve-resume/route.ts
+interview/route.ts
+
+components/
+Navbar.tsx
+Button.tsx
+Input.tsx
+OutputCard.tsx
+
+lib/
+openai.ts
+
+====================
+API IMPLEMENTATION
+==================
+
+* Use OpenAI official SDK
+
+* Store API key in environment variable:
+  process.env.OPENAI_API_KEY
+
+* Each API route must:
+
+  * accept POST request
+  * parse JSON body
+  * call OpenAI
+  * return JSON response
+
+* Use standard serverless functions (NO edge unless safe)
+
+====================
+UI / DESIGN (VERY IMPORTANT)
+============================
+
+Design must be premium, minimal, and modern inspired by:
+rytcode.xyz, tpot.cc, lnk.ad, tree.je
+
+LAYOUT:
+
+* Center aligned content
+* Clean spacing
+* Minimal UI
+* No heavy shadows
+
+FONTS:
+
+* Headings: Instrument Serif
+* Body: Inter
+
+TYPOGRAPHY:
+
+* Large hero heading
+* Clean readable text
+* Proper spacing
+
+COLOR SYSTEM:
+
+Light Mode:
+
+* Background: #ffffff
+* Text: #0a0a0a
+* Border: #e5e5e5
+* Accent: subtle green
+
+Dark Mode:
+
+* Background: #0f0f0f
+* Cards: #1a1a1a
+* Text: #f5f5f5
+* Accent button: green
+
+BUTTON STYLE:
+
+* Rounded-xl
+* Smooth hover
+* No shadow or very subtle
+
+====================
+PAGES
+=====
+
+1. Home Page (/)
+
+* Hero heading:
+  "Build your AI-powered career"
+* Subheading
+* CTA button → Dashboard
+
+2. Dashboard
+
+* 3 cards:
+
+  * Resume Generator
+  * Resume Improver
+  * Interview Prep
+
+3. Resume Generator Page
+
+* Form
+* Generate button
+* Output below
+
+4. Resume Improver Page
+
+* Textarea
+* Improve button
+* Output below
+
+5. Interview Page
+
+* Input
+* Generate Q&A
+
+====================
+IMPORTANT UX NOTE
+=================
+
+Display this message clearly in UI:
+
+"Don’t refresh the page — your data will be lost."
+
+====================
+DEPLOYMENT REQUIREMENTS
+=======================
+
+* Must run successfully on Vercel
+* No build errors
+* No server-only dependencies
+* Use npm or pnpm but NO workspaces
+* Include instructions for .env.local
+
+====================
+CODE QUALITY
+============
+
+* Clean and readable code
+* Reusable components
+* Mobile responsive
+* No unnecessary complexity
+
+====================
+FINAL OUTPUT
+============
+
+Generate full working code for all files.
+
+Ensure the project:
+
+* builds successfully
+* runs locally with npm run dev
+* deploys on Vercel without errors

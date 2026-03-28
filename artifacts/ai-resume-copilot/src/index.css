@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  --color-background: hsl(0 0% 4%);
+  --color-foreground: hsl(0 0% 96%);
+  
+  --color-card: hsl(0 0% 8%);
+  --color-card-foreground: hsl(0 0% 96%);
+  
+  --color-border: hsl(0 0% 15%);
+  --color-input: hsl(0 0% 12%);
+  
+  --color-primary: hsl(160 84% 39%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  
+  --color-muted: hsl(0 0% 12%);
+  --color-muted-foreground: hsl(0 0% 65%);
+  
+  --color-accent: hsl(160 84% 39%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  
+  --color-ring: hsl(160 84% 39%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+/* Custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0 0% 4%); 
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 20%); 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 0% 30%); 
+}

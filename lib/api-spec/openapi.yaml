@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: resume
+    description: Resume and career AI operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,67 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /resume/generate:
+    post:
+      operationId: generateResume
+      tags: [resume]
+      summary: Generate a resume
+      description: Generate a professional ATS-friendly resume from user inputs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateResumeBody"
+      responses:
+        "200":
+          description: Generated resume
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResumeResult"
+
+  /resume/improve:
+    post:
+      operationId: improveResume
+      tags: [resume]
+      summary: Improve an existing resume
+      description: Takes an existing resume and returns an improved professional version
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImproveResumeBody"
+      responses:
+        "200":
+          description: Improved resume
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResumeResult"
+
+  /resume/interview:
+    post:
+      operationId: generateInterviewQuestions
+      tags: [resume]
+      summary: Generate interview questions and answers
+      description: Generate interview questions and model answers for a given role or skills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InterviewBody"
+      responses:
+        "200":
+          description: Interview questions and answers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InterviewResult"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +97,70 @@ components:
       required:
         - status
 
+    GenerateResumeBody:
+      type: object
+      properties:
+        name:
+          type: string
+        skills:
+          type: string
+        experience:
+          type: string
+        education:
+          type: string
+        targetRole:
+          type: string
+      required:
+        - name
+        - skills
+        - experience
+        - education
+
+    ImproveResumeBody:
+      type: object
+      properties:
+        resume:
+          type: string
+        targetRole:
+          type: string
+      required:
+        - resume
+
+    InterviewBody:
+      type: object
+      properties:
+        role:
+          type: string
+        skills:
+          type: string
+      required:
+        - role
+
+    ResumeResult:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+
+    InterviewResult:
+      type: object
+      properties:
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/InterviewQA"
+      required:
+        - questions
+
+    InterviewQA:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+      required:
+        - question
+        - answer

@@ -2,7 +2,7 @@
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+AI Resume & Career Copilot - a full-stack web app for generating, improving resumes, and interview preparation using OpenAI.
 
 ## Stack
 
@@ -15,6 +15,20 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **Validation**: Zod (`zod/v4`), `drizzle-zod`
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
+- **AI**: OpenAI via Replit AI Integrations (gpt-5.2), no personal API key needed
+- **Frontend**: React + Vite with Tailwind CSS, framer-motion, react-hook-form
+
+## Features
+
+1. **Resume Generator** - AI creates professional ATS-optimized resume from name, skills, experience, education
+2. **Resume Improver** - AI rewrites and enhances an existing resume
+3. **Interview Prep** - AI generates Q&A for any role/skills
+
+## API Routes (in api-server)
+
+- `POST /api/resume/generate` - Generate resume from inputs
+- `POST /api/resume/improve` - Improve existing resume
+- `POST /api/resume/interview` - Generate interview Q&A
 
 ## Structure
 

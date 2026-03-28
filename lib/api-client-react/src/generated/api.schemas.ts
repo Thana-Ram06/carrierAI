@@ -8,3 +8,34 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface GenerateResumeBody {
+  name: string;
+  skills: string;
+  experience: string;
+  education: string;
+  targetRole?: string;
+}
+
+export interface ImproveResumeBody {
+  resume: string;
+  targetRole?: string;
+}
+
+export interface InterviewBody {
+  role: string;
+  skills?: string;
+}
+
+export interface ResumeResult {
+  content: string;
+}
+
+export interface InterviewQA {
+  question: string;
+  answer: string;
+}
+
+export interface InterviewResult {
+  questions: InterviewQA[];
+}
