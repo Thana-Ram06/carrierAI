@@ -11,7 +11,7 @@ version = "1.0.0"
 
 [[services]]
 name = "web"
-paths = [ "/" ]
+paths = [ "/", "/api/generate-resume", "/api/improve-resume", "/api/interview" ]
 localPort = 18332
 
 [services.development]
@@ -19,13 +19,7 @@ run = "pnpm --filter @workspace/ai-resume-copilot run dev"
 
 [services.production]
 build = [ "pnpm", "--filter", "@workspace/ai-resume-copilot", "run", "build" ]
-publicDir = "artifacts/ai-resume-copilot/dist/public"
-serve = "static"
-
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
+run = "pnpm --filter @workspace/ai-resume-copilot run start"
 
 [services.env]
 PORT = "18332"
-BASE_PATH = "/"

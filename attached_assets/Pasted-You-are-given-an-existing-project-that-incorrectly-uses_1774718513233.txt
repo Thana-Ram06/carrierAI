@@ -1,0 +1,162 @@
+You are given an existing project that incorrectly uses Express, pnpm workspace, and backend server architecture.
+
+Your task is to REFACTOR and CONVERT this project into a clean, single Next.js 16 application that is fully compatible with Vercel deployment.
+
+====================
+CRITICAL INSTRUCTIONS (MUST FOLLOW)
+===================================
+
+* REMOVE all Express server code
+
+* REMOVE pnpm workspace and monorepo structure
+
+* REMOVE folders like:
+
+  * api-server
+  * packages
+  * lib/server
+
+* REMOVE dependencies:
+
+  * express
+  * pino
+  * pino-http
+  * drizzle
+  * cors
+  * cookie-parser
+
+* DO NOT use any custom backend server
+
+* ONLY use Next.js App Router
+
+* ONLY use /app/api routes for backend logic
+
+====================
+FINAL ARCHITECTURE (REQUIRED)
+=============================
+
+Convert everything into a single Next.js app with this structure:
+
+app/
+page.tsx
+dashboard/page.tsx
+resume-generator/page.tsx
+resume-improver/page.tsx
+interview/page.tsx
+
+api/
+generate-resume/route.ts
+improve-resume/route.ts
+interview/route.ts
+
+components/
+Navbar.tsx
+Button.tsx
+Input.tsx
+OutputCard.tsx
+
+lib/
+openai.ts
+
+====================
+FUNCTIONALITY
+=============
+
+Re-implement features using Next.js:
+
+1. Resume Generator
+
+* Accept user input (name, skills, experience)
+* Call /api/generate-resume
+* Return AI-generated resume
+
+2. Resume Improver
+
+* Accept resume text
+* Call /api/improve-resume
+* Return improved version
+
+3. Interview Generator
+
+* Accept role/skills
+* Call /api/interview
+* Return questions + answers
+
+====================
+API IMPLEMENTATION
+==================
+
+* Use OpenAI SDK inside Next.js API routes
+* Example:
+
+POST /app/api/generate-resume/route.ts
+
+* Parse JSON request
+* Call OpenAI using process.env.OPENAI_API_KEY
+* Return JSON response
+
+====================
+UI / DESIGN
+===========
+
+Create a premium, minimal UI inspired by:
+rytcode.xyz, tpot.cc, lnk.ad, tree.je
+
+* Centered layout
+* Clean spacing
+* Minimal design
+* Soft borders (no heavy shadows)
+
+FONTS:
+
+* Headings: Instrument Serif
+* Body: Inter
+
+COLORS:
+
+Light Mode:
+
+* Background: #ffffff
+* Text: #0a0a0a
+* Border: #e5e5e5
+
+Dark Mode:
+
+* Background: #0f0f0f
+* Cards: #1a1a1a
+* Text: #f5f5f5
+
+Accent:
+
+* Green button for primary actions
+
+====================
+IMPORTANT UX
+============
+
+Display this message clearly:
+
+"Don’t refresh the page — your data will be lost."
+
+====================
+DEPLOYMENT REQUIREMENTS
+=======================
+
+* Must build successfully on Vercel
+* No Node.js server usage
+* No workspace configs
+* Use standard Next.js setup
+
+====================
+FINAL GOAL
+==========
+
+Transform the existing project into a clean, minimal, production-ready Next.js AI app.
+
+Ensure:
+
+* npm run dev works
+* npm run build works
+* Vercel deployment succeeds without errors
+
+Generate updated full codebase.

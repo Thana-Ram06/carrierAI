@@ -24,11 +24,13 @@ AI Resume & Career Copilot - a full-stack web app for generating, improving resu
 2. **Resume Improver** - AI rewrites and enhances an existing resume
 3. **Interview Prep** - AI generates Q&A for any role/skills
 
-## API Routes (in api-server)
+## API Routes (Next.js App Router — no Express)
 
-- `POST /api/resume/generate` - Generate resume from inputs
-- `POST /api/resume/improve` - Improve existing resume
-- `POST /api/resume/interview` - Generate interview Q&A
+- `POST /api/generate-resume` — `app/api/generate-resume/route.ts`
+- `POST /api/improve-resume` — `app/api/improve-resume/route.ts`
+- `POST /api/interview` — `app/api/interview/route.ts`
+
+All AI calls go through Replit AI Integrations (OpenAI). No Express server is used.
 
 ## Structure
 
