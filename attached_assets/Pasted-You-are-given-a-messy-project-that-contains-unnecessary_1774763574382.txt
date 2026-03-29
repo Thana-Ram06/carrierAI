@@ -1,0 +1,163 @@
+You are given a messy project that contains unnecessary backend code, pnpm workspace setup, and Replit-generated server architecture.
+
+Your task is to COMPLETELY CLEAN this project and REBUILD it into a SINGLE clean Next.js 16 application.
+
+====================
+STEP 1: DELETE UNNECESSARY FILES (MANDATORY)
+============================================
+
+Delete ALL of the following folders and their contents:
+
+* artifacts/
+* scripts/
+* lib/api-zod/
+* lib/db/
+* lib/api-spec/
+* lib/integrations/
+* lib/integrations-openai-ai-server/
+* lib/integrations-openai-ai-react/
+
+Delete ALL backend-related files.
+
+Delete any file or folder related to:
+
+* Express
+* pnpm workspace
+* server code
+* database code
+
+====================
+STEP 2: DELETE CONFIG FILES
+===========================
+
+Delete these files if they exist:
+
+* pnpm-lock.yaml
+* pnpm-workspace.yaml
+* any extra package.json inside subfolders
+
+====================
+STEP 3: CLEAN package.json
+==========================
+
+Modify root package.json:
+
+* REMOVE "workspaces"
+* REMOVE dependencies:
+  express, pino, pino-http, drizzle, cors, cookie-parser
+* KEEP only:
+  next, react, react-dom, openai, tailwindcss
+
+Ensure scripts:
+
+"scripts": {
+"dev": "next dev",
+"build": "next build",
+"start": "next start"
+}
+
+====================
+STEP 4: FINAL PROJECT STRUCTURE
+===============================
+
+After cleanup, the project MUST look like this:
+
+app/
+page.tsx
+dashboard/page.tsx
+resume-generator/page.tsx
+resume-improver/page.tsx
+interview/page.tsx
+
+api/
+generate-resume/route.ts
+improve-resume/route.ts
+interview/route.ts
+
+components/
+Navbar.tsx
+Button.tsx
+Input.tsx
+OutputCard.tsx
+
+lib/
+openai.ts
+
+package.json
+next.config.js
+tailwind.config.js
+
+====================
+STEP 5: REBUILD FUNCTIONALITY
+=============================
+
+Rebuild features using ONLY Next.js:
+
+* Resume Generator → calls /api/generate-resume
+* Resume Improver → calls /api/improve-resume
+* Interview Generator → calls /api/interview
+
+====================
+STEP 6: API IMPLEMENTATION
+==========================
+
+* Use OpenAI SDK
+* Use process.env.OPENAI_API_KEY
+* All logic inside /app/api routes
+* NO backend server
+
+====================
+STEP 7: UI DESIGN
+=================
+
+Create a premium minimal UI inspired by:
+rytcode.xyz, tpot.cc, lnk.ad, tree.je
+
+* Center aligned layout
+* Clean spacing
+* Soft borders
+* No heavy shadows
+
+Fonts:
+
+* Headings: Instrument Serif
+* Body: Inter
+
+Colors:
+
+* Light: white background, dark text
+* Dark: #0f0f0f background, light text
+* Accent: green
+
+====================
+STEP 8: IMPORTANT NOTE
+======================
+
+Display this message clearly in UI:
+
+"Don’t refresh the page — your data will be lost."
+
+====================
+STEP 9: FINAL REQUIREMENT
+=========================
+
+* The project MUST be a single Next.js app
+
+* It MUST NOT include any workspace or backend system
+
+* It MUST run with:
+  npm install
+  npm run dev
+  npm run build
+
+* It MUST deploy successfully on Vercel without errors
+
+====================
+FINAL INSTRUCTION
+=================
+
+If ANY backend code, workspace config, or Express code remains, DELETE it completely.
+
+Only keep what is required for a clean Next.js app.
+
+Generate the FULL cleaned and rebuilt project.

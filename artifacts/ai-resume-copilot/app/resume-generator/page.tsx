@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import type { Metadata } from "next";
+import Button from "@/components/Button";
+import { Input, Textarea } from "@/components/Input";
 import OutputCard from "@/components/OutputCard";
 import WarningBanner from "@/components/WarningBanner";
 
@@ -15,6 +18,9 @@ export default function ResumeGenerator() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,178 +58,66 @@ export default function ResumeGenerator() {
       >
         Resume Generator
       </h1>
-      <p
-        style={{
-          color: "var(--muted-foreground)",
-          marginBottom: "32px",
-          fontSize: "1rem",
-        }}
-      >
-        Let AI craft a professional resume tailored for your industry.
+      <p style={{ color: "var(--muted-foreground)", marginBottom: "32px", fontSize: "1rem" }}>
+        Let AI craft a professional, ATS-optimized resume tailored for your industry.
       </p>
 
       <WarningBanner />
 
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-          <Field
+          <Input
             label="Full Name"
             placeholder="e.g. Jane Doe"
             value={form.name}
-            onChange={(v) => setForm({ ...form, name: v })}
+            onChange={set("name")}
             required
           />
-          <Field
+          <Input
             label="Target Role (Optional)"
             placeholder="e.g. Senior Software Engineer"
             value={form.targetRole}
-            onChange={(v) => setForm({ ...form, targetRole: v })}
+            onChange={set("targetRole")}
           />
         </div>
 
-        <TextArea
+        <Textarea
           label="Skills"
           placeholder="List your technical and soft skills..."
           value={form.skills}
-          onChange={(v) => setForm({ ...form, skills: v })}
+          onChange={set("skills")}
+          rows={3}
           required
         />
 
-        <TextArea
-          label="Experience"
+        <Textarea
+          label="Work Experience"
           placeholder="Describe your past roles, companies, and achievements..."
           value={form.experience}
-          onChange={(v) => setForm({ ...form, experience: v })}
+          onChange={set("experience")}
+          rows={5}
           required
         />
 
-        <TextArea
+        <Textarea
           label="Education"
           placeholder="Your degrees, certifications, institutions..."
           value={form.education}
-          onChange={(v) => setForm({ ...form, education: v })}
+          onChange={set("education")}
+          rows={3}
           required
         />
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            padding: "14px 28px",
-            borderRadius: "12px",
-            backgroundColor: loading ? "var(--muted)" : "var(--accent-green)",
-            color: loading ? "var(--muted-foreground)" : "#ffffff",
-            border: "none",
-            fontSize: "1rem",
-            fontWeight: 500,
-            cursor: loading ? "not-allowed" : "pointer",
-            transition: "all 0.15s",
-            alignSelf: "flex-start",
-          }}
-        >
-          {loading ? "Generating..." : "Generate Resume →"}
-        </button>
+        <Button type="submit" loading={loading} loadingText="Generating...">
+          Generate Resume →
+        </Button>
       </form>
 
       {error && (
-        <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "0.9rem" }}>
-          {error}
-        </p>
+        <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "0.9rem" }}>{error}</p>
       )}
 
       {result && <OutputCard content={result} title="Generated Resume" />}
-    </div>
-  );
-}
-
-function Field({
-  label,
-  placeholder,
-  value,
-  onChange,
-  required,
-}: {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (v: string) => void;
-  required?: boolean;
-}) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-      <label
-        style={{
-          fontSize: "0.875rem",
-          fontWeight: 500,
-          color: "var(--foreground)",
-        }}
-      >
-        {label}
-      </label>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        required={required}
-        style={{
-          padding: "10px 14px",
-          borderRadius: "10px",
-          border: "1px solid var(--border)",
-          backgroundColor: "var(--input-bg)",
-          color: "var(--foreground)",
-          fontSize: "0.9rem",
-          outline: "none",
-          width: "100%",
-        }}
-      />
-    </div>
-  );
-}
-
-function TextArea({
-  label,
-  placeholder,
-  value,
-  onChange,
-  required,
-}: {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (v: string) => void;
-  required?: boolean;
-}) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-      <label
-        style={{
-          fontSize: "0.875rem",
-          fontWeight: 500,
-          color: "var(--foreground)",
-        }}
-      >
-        {label}
-      </label>
-      <textarea
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        required={required}
-        rows={4}
-        style={{
-          padding: "10px 14px",
-          borderRadius: "10px",
-          border: "1px solid var(--border)",
-          backgroundColor: "var(--input-bg)",
-          color: "var(--foreground)",
-          fontSize: "0.9rem",
-          outline: "none",
-          resize: "vertical",
-          fontFamily: "inherit",
-          width: "100%",
-        }}
-      />
     </div>
   );
 }

@@ -52,3 +52,7 @@ body {
 .font-serif {
   font-family: var(--font-serif);
 }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

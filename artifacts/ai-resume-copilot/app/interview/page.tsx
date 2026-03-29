@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Button from "@/components/Button";
+import { Input, Textarea } from "@/components/Input";
 import WarningBanner from "@/components/WarningBanner";
 
 interface QAPair {
@@ -21,6 +23,7 @@ export default function InterviewPrep() {
     setLoading(true);
     setError("");
     setQuestions([]);
+    setExpanded(null);
 
     try {
       const res = await fetch("/api/interview", {
@@ -52,102 +55,36 @@ export default function InterviewPrep() {
       >
         Interview Prep
       </h1>
-      <p
-        style={{
-          color: "var(--muted-foreground)",
-          marginBottom: "32px",
-          fontSize: "1rem",
-        }}
-      >
+      <p style={{ color: "var(--muted-foreground)", marginBottom: "32px", fontSize: "1rem" }}>
         Get targeted interview questions and model answers for your next role.
       </p>
 
       <WarningBanner />
 
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <label
-            style={{
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              color: "var(--foreground)",
-            }}
-          >
-            Target Role
-          </label>
-          <input
-            type="text"
-            placeholder="e.g. Software Engineer, Marketing Manager"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            required
-            style={{
-              padding: "10px 14px",
-              borderRadius: "10px",
-              border: "1px solid var(--border)",
-              backgroundColor: "var(--input-bg)",
-              color: "var(--foreground)",
-              fontSize: "0.9rem",
-              outline: "none",
-              width: "100%",
-            }}
-          />
-        </div>
+        <Input
+          label="Target Role"
+          placeholder="e.g. Software Engineer, Marketing Manager"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          required
+        />
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <label
-            style={{
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              color: "var(--foreground)",
-            }}
-          >
-            Key Skills (Optional)
-          </label>
-          <textarea
-            placeholder="e.g. React, Node.js, leadership, agile..."
-            value={skills}
-            onChange={(e) => setSkills(e.target.value)}
-            rows={3}
-            style={{
-              padding: "10px 14px",
-              borderRadius: "10px",
-              border: "1px solid var(--border)",
-              backgroundColor: "var(--input-bg)",
-              color: "var(--foreground)",
-              fontSize: "0.9rem",
-              outline: "none",
-              resize: "vertical",
-              fontFamily: "inherit",
-              width: "100%",
-            }}
-          />
-        </div>
+        <Textarea
+          label="Key Skills (Optional)"
+          placeholder="e.g. React, Node.js, leadership, agile..."
+          value={skills}
+          onChange={(e) => setSkills(e.target.value)}
+          rows={3}
+        />
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            padding: "14px 28px",
-            borderRadius: "12px",
-            backgroundColor: loading ? "var(--muted)" : "var(--accent-green)",
-            color: loading ? "var(--muted-foreground)" : "#ffffff",
-            border: "none",
-            fontSize: "1rem",
-            fontWeight: 500,
-            cursor: loading ? "not-allowed" : "pointer",
-            transition: "all 0.15s",
-            alignSelf: "flex-start",
-          }}
-        >
-          {loading ? "Generating Questions..." : "Generate Q&A →"}
-        </button>
+        <Button type="submit" loading={loading} loadingText="Generating Questions...">
+          Generate Q&amp;A →
+        </Button>
       </form>
 
       {error && (
-        <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "0.9rem" }}>
-          {error}
-        </p>
+        <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "0.9rem" }}>{error}</p>
       )}
 
       {questions.length > 0 && (
@@ -188,6 +125,7 @@ export default function InterviewPrep() {
                     cursor: "pointer",
                     textAlign: "left",
                     color: "var(--foreground)",
+                    fontFamily: "inherit",
                   }}
                 >
                   <span
@@ -210,19 +148,19 @@ export default function InterviewPrep() {
                   <span style={{ fontSize: "0.95rem", fontWeight: 500, flex: 1, lineHeight: 1.5 }}>
                     {qa.question}
                   </span>
-                  <span style={{ color: "var(--muted-foreground)", flexShrink: 0 }}>
+                  <span style={{ color: "var(--muted-foreground)", flexShrink: 0, fontSize: "0.75rem" }}>
                     {expanded === i ? "▲" : "▼"}
                   </span>
                 </button>
+
                 {expanded === i && (
                   <div
                     style={{
-                      padding: "0 20px 20px 56px",
+                      padding: "16px 20px 20px 56px",
                       fontSize: "0.9rem",
                       lineHeight: 1.7,
                       color: "var(--muted-foreground)",
                       borderTop: "1px solid var(--border)",
-                      paddingTop: "16px",
                     }}
                   >
                     {qa.answer}
