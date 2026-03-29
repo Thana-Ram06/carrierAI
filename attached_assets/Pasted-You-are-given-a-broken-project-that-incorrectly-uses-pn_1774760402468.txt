@@ -1,0 +1,156 @@
+You are given a broken project that incorrectly uses pnpm workspace, Express server, and backend architecture.
+
+Your task is to COMPLETELY CLEAN and CONVERT this project into a SINGLE Next.js 16 application that is fully compatible with Vercel deployment.
+
+====================
+MANDATORY RULES (DO NOT BREAK)
+==============================
+
+* This MUST be a SINGLE Next.js app
+
+* DO NOT use Express
+
+* DO NOT use any backend server
+
+* DO NOT use pnpm workspace or monorepo
+
+* DO NOT use packages folder
+
+* DO NOT use api-server folder
+
+* DO NOT use drizzle, pino, cors, cookie-parser
+
+* DELETE all files and folders related to:
+
+  * api-server
+  * packages
+  * lib/db
+  * lib/api-zod
+  * lib/integrations-openai-ai-server
+  * pnpm-workspace.yaml
+  * pnpm-lock.yaml
+
+* REMOVE "workspaces" from package.json
+
+* REMOVE all backend dependencies (express, pino, etc.)
+
+====================
+FINAL PROJECT STRUCTURE (REQUIRED)
+==================================
+
+The final project MUST look like this:
+
+app/
+page.tsx
+dashboard/page.tsx
+resume-generator/page.tsx
+resume-improver/page.tsx
+interview/page.tsx
+
+api/
+generate-resume/route.ts
+improve-resume/route.ts
+interview/route.ts
+
+components/
+Navbar.tsx
+Button.tsx
+Input.tsx
+OutputCard.tsx
+
+lib/
+openai.ts
+
+package.json
+next.config.js
+tailwind.config.js
+
+====================
+FUNCTIONALITY
+=============
+
+Rebuild the app using Next.js only:
+
+1. Resume Generator
+
+* Form input
+* Call /api/generate-resume
+* Show AI response
+
+2. Resume Improver
+
+* Textarea input
+* Call /api/improve-resume
+
+3. Interview Generator
+
+* Input role/skills
+* Call /api/interview
+
+====================
+API RULES
+=========
+
+* All backend logic must be inside /app/api routes
+* Use OpenAI SDK
+* Use process.env.OPENAI_API_KEY
+* No external server allowed
+
+====================
+UI DESIGN
+=========
+
+Create premium minimal UI inspired by:
+rytcode.xyz, tpot.cc, lnk.ad, tree.je
+
+* Center aligned layout
+* Clean spacing
+* Minimal design
+* Soft borders
+* No heavy shadows
+
+Fonts:
+
+* Headings: Instrument Serif
+* Body: Inter
+
+Colors:
+
+* Light: white background, dark text
+* Dark: #0f0f0f background, light text
+* Accent: green button
+
+====================
+IMPORTANT UX
+============
+
+Display this message clearly:
+
+"Don’t refresh the page — your data will be lost."
+
+====================
+DEPLOYMENT REQUIREMENTS
+=======================
+
+* Must work with npm (NOT pnpm workspace)
+* Must build successfully on Vercel
+* Must NOT trigger workspace or Express build
+* Must NOT include api-server
+
+====================
+FINAL INSTRUCTION
+=================
+
+Completely refactor the project.
+
+If any Express, workspace, or backend code remains, REMOVE it.
+
+Ensure the final result is a clean Next.js app that runs with:
+
+npm install
+npm run dev
+npm run build
+
+and deploys successfully on Vercel without errors.
+
+Generate the FULL corrected codebase.

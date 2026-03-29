@@ -1,11 +1,11 @@
 {
-  "name": "@workspace/ai-resume-copilot",
-  "version": "0.0.0",
+  "name": "ai-resume-copilot",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port $PORT --hostname 0.0.0.0",
+    "dev": "next dev --port ${PORT:-3000} --hostname 0.0.0.0",
     "build": "next build",
-    "start": "next start --port $PORT --hostname 0.0.0.0"
+    "start": "next start --port ${PORT:-3000} --hostname 0.0.0.0"
   },
   "dependencies": {
     "next": "^15.3.1",

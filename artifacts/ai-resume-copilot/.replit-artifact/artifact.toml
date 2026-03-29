@@ -15,11 +15,11 @@ paths = [ "/", "/api/generate-resume", "/api/improve-resume", "/api/interview" ]
 localPort = 18332
 
 [services.development]
-run = "pnpm --filter @workspace/ai-resume-copilot run dev"
+run = "npm run dev"
 
 [services.production]
-build = [ "pnpm", "--filter", "@workspace/ai-resume-copilot", "run", "build" ]
-run = "pnpm --filter @workspace/ai-resume-copilot run start"
+build = [ "npm", "run", "build" ]
+run = "npm run start"
 
 [services.env]
 PORT = "18332"
